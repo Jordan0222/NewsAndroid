@@ -53,6 +53,7 @@ class NewsAdapter @Inject constructor(): RecyclerView.Adapter<NewsAdapter.NewsVi
                 binding.itemImage.load(item.urlToImage) {
                     crossfade(true)
                     placeholder(R.drawable.ic_placeholder)
+                    fallback(R.drawable.ic_placeholder)
                 }
 
                 /*binding.cardView.setOnClickListener {
