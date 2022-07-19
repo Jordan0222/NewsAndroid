@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jordan.newsandroid">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".NewsAndroidApp"
@@ -16,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsAndroid"
         tools:targetApi="31">
+        <activity
+            android:name=".composeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_compose"
+            android:theme="@style/Theme.NewsAndroid" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
