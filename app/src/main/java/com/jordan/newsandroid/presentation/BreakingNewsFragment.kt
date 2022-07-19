@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jordan.newsandroid.R
@@ -25,10 +27,21 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     @Inject
     lateinit var newsAdapter: NewsAdapter
 
+    override fun onResume() {
+        super.onResume()
+        val countries = resources.getStringArray(R.array.countries)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, countries)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
+        binding.autoCompleteTextView.addTextChangedListener {
+            breakingNewsViewModel.onEvent(binding.autoCompleteTextView.text.toString())
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBreakingNewsBinding.inflate(inflater, container, false)
 
         breakingNewsViewModel = ViewModelProvider(requireActivity())[BreakingNewsViewModel::class.java]

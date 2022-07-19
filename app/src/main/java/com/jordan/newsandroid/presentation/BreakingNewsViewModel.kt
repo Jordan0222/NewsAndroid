@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jordan.newsandroid.domain.model.Article
 import com.jordan.newsandroid.domain.repository.ArticleRepository
+import com.jordan.newsandroid.util.Country
 import com.jordan.newsandroid.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -22,32 +23,21 @@ class BreakingNewsViewModel @Inject constructor(
     private val _newsItems = MutableLiveData<List<Article>>()
     val newsItems: LiveData<List<Article>> = _newsItems
 
+    private val _countryAbbrev = MutableLiveData<String>()
+
     private var getArticlesJob: Job? = null
 
     init {
         getNews("tw")
     }
 
-    /*fun onEvent(event: BreakingNewsEvent) {
-        when (event) {
-            is BreakingNewsEvent.CountryAbbrev -> {
-                if (newsItems.value.countryAbbrev == event.countryAbbrev) {
-                    return
-                }
-                getNews(event.countryAbbrev)
-            }
-            is BreakingNewsEvent.SpinnerClose -> {
-                _newsItems.value = newsItems.value.copy(
-                    isExpanded = false
-                )
-            }
-            is BreakingNewsEvent.SpinnerOpen -> {
-                _newsItems.value = newsItems.value.copy(
-                    isExpanded = true
-                )
-            }
+    fun onEvent(country: String) {
+        val countryAbbrev = Country.getCountryAbbrev(country)
+        if (_countryAbbrev.value == countryAbbrev) {
+            return
         }
-    }*/
+        getNews(countryAbbrev)
+    }
 
     private fun getNews(countryAbbrev: String) {
         getArticlesJob?.cancel()
