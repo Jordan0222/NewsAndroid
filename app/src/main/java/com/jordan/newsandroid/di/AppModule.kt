@@ -1,5 +1,6 @@
 package com.jordan.newsandroid.di
 
+import com.jordan.newsandroid.adapter.NewsAdapter
 import com.jordan.newsandroid.data.remote.NewsApi
 import com.jordan.newsandroid.data.repository.ArticleRepositoryImpl
 import com.jordan.newsandroid.domain.repository.ArticleRepository
@@ -18,6 +19,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Singleton
+    @Provides
+    fun provideNewsAdapter() = NewsAdapter()
 
     @Provides
     @Singleton
