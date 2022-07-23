@@ -1,7 +1,7 @@
 package com.jordan.newsandroid.data.repository
 
 import com.jordan.newsandroid.data.remote.NewsApi
-import com.jordan.newsandroid.domain.model.Article
+import com.jordan.newsandroid.domain.model.News
 import com.jordan.newsandroid.domain.repository.ArticleRepository
 import com.jordan.newsandroid.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ import java.io.IOException
 class ArticleRepositoryImpl(
     private val api: NewsApi
 ): ArticleRepository {
-    override fun getTopArticles(country: String): Flow<Resource<List<Article>>> = flow {
+    override fun getTopArticles(country: String): Flow<Resource<List<News>>> = flow {
         emit(Resource.Loading())
 
         try {
@@ -31,7 +31,7 @@ class ArticleRepositoryImpl(
         }
     }
 
-    override fun searchArticle(searchQuery: String): Flow<Resource<List<Article>>> = flow {
+    override fun searchArticle(searchQuery: String): Flow<Resource<List<News>>> = flow {
         emit(Resource.Loading())
 
         try {
@@ -52,7 +52,7 @@ class ArticleRepositoryImpl(
     override fun getCategoryArticles(
         country: String,
         category: String
-    ): Flow<Resource<List<Article>>> = flow {
+    ): Flow<Resource<List<News>>> = flow {
         emit(Resource.Loading())
 
         try {

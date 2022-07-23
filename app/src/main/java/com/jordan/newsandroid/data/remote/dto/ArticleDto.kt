@@ -1,6 +1,6 @@
 package com.jordan.newsandroid.data.remote.dto
 
-import com.jordan.newsandroid.domain.model.Article
+import com.jordan.newsandroid.domain.model.News
 
 data class ArticleDto(
     val source: SourceDto,
@@ -12,8 +12,8 @@ data class ArticleDto(
     val url: String,
     val urlToImage: String
 ) {
-    fun toArticle(): Article {
-        return Article(
+    fun toArticle(): News {
+        return News(
             description = description,
             title = title,
             url = url,

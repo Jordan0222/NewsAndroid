@@ -2,33 +2,35 @@ package com.jordan.newsandroid.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.jordan.newsandroid.R
 import com.jordan.newsandroid.databinding.NewsItemBinding
-import com.jordan.newsandroid.domain.model.Article
+import com.jordan.newsandroid.domain.model.News
+import com.jordan.newsandroid.presentation.breaking_news.BreakingNewsFragmentDirections
 import javax.inject.Inject
 
 class NewsAdapter @Inject constructor(): RecyclerView.Adapter<NewsAdapter.NewsViewHolder>(){
 
     inner class NewsViewHolder(val binding: NewsItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<Article>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<News>() {
 
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    var news: List<Article>
+    var news: List<News>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -44,6 +46,7 @@ class NewsAdapter @Inject constructor(): RecyclerView.Adapter<NewsAdapter.NewsVi
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val item = news[position]
+        val action = BreakingNewsFragmentDirections.actionBreakingNewsFragmentToNewsActivity(item)
 
         with(holder) {
             with(news[position]) {
@@ -56,9 +59,9 @@ class NewsAdapter @Inject constructor(): RecyclerView.Adapter<NewsAdapter.NewsVi
                     fallback(R.drawable.ic_placeholder)
                 }
 
-                /*binding.cardView.setOnClickListener {
+                binding.linearLayout.setOnClickListener {
                     holder.itemView.findNavController().navigate(action)
-                }*/
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.jordan.newsandroid.presentation
+package com.jordan.newsandroid.presentation.breaking_news
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

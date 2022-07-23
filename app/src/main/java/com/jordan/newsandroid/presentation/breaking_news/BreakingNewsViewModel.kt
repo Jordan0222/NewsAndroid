@@ -1,10 +1,10 @@
-package com.jordan.newsandroid.presentation
+package com.jordan.newsandroid.presentation.breaking_news
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jordan.newsandroid.domain.model.Article
+import com.jordan.newsandroid.domain.model.News
 import com.jordan.newsandroid.domain.repository.ArticleRepository
 import com.jordan.newsandroid.util.Country
 import com.jordan.newsandroid.util.Resource
@@ -20,8 +20,8 @@ class BreakingNewsViewModel @Inject constructor(
     private val repository: ArticleRepository
 ): ViewModel() {
 
-    private val _newsItems = MutableLiveData<List<Article>>()
-    val newsItems: LiveData<List<Article>> = _newsItems
+    private val _newsItems = MutableLiveData<List<News>>()
+    val newsItems: LiveData<List<News>> = _newsItems
 
     private val _countryAbbrev = MutableLiveData<String>()
 
